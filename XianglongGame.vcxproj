@@ -128,9 +128,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="XianglongGame.cpp" />
+    <ClCompile Include="xlmanager.cpp" />
     <ClCompile Include="xlplayer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="global.h" />
+    <ClInclude Include="xlmanager.h" />
     <ClInclude Include="xlplayer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

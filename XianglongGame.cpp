@@ -1,11 +1,7 @@
 ﻿// XianglongGame.cpp : 此文件包含 "main" 函数。程序执行将在此处开始并结束。
 //
 
-#include <stdio.h>
-#include <math.h>
-#include <stdlib.h>
-#include <time.h>
-
+#include "global.h"
 
 struct Node {   //节点结构体
   //Node* prior;
@@ -17,6 +13,14 @@ struct Node {   //节点结构体
 
 int gstok[60], ql = 1, qr;    //机器可用操作列表
 unsigned long long ran;    //随机数
+
+mt19937_64 random(std::random_device{}()); //随机数
+manager xlgame; //管理类
+
+constexpr int maxrow1 = 4;
+constexpr int maxrow2 = 3;
+
+
 
 int rounds = 0;    //回合计数
 int Gst0, Gst1;   //操作类型
@@ -89,9 +93,9 @@ void print_GameRule() {
     printf("《六脉》：消耗6个降龙，对目标造成6点伤害；\n");
     printf("《九阴》：消耗9个降龙，对目标造成9点伤害；\n");
     printf("《降龙十八掌》：消耗18个降龙，秒杀目标；\n");
-    printf("《 防 》：抵御受到的攻击，无法防御《全发》以上的伤害；\n");
-    printf("《 扛 》：防御，无法防御《全发》及以上的伤害，且不能连续出5次；\n");
-    printf("《大扛》：防御，无法防御《九阴》及以上的伤害，且不能连续出4次；\n");
+    printf("《 防 》：抵御受到的攻击，无法防御等级为《全发》以上的伤害；\n");
+    printf("《 扛 》：防御，无法防御等级为《九阴》及以上的伤害，且不能连续出5次；\n");
+    printf("《大扛》：防御，无法防御等级为《降龙十八掌》及以上的伤害，且不能连续出4次；\n");
     printf("有玩家攻击时：\n");
     printf("若被攻方未防守或防御级别不够则出局；\n");
     printf("两方互相攻击对方时，伤害低者出局，伤害相同则无事发生；\n");
@@ -266,7 +270,7 @@ int go_CPU(int type,int ptself,int ptoppo,int row1,int row2, Node* memoself, Nod
     for (int i = 0; i < rt % 8; i++) {
         ran = (25214903917 * ran) % (rtt - 1) + rand();
     }
-    /*  测试用代码
+    /*  //测试用代码
     printf("%d\n", r);
     printf("%d\n", size(&memo0));
     */
@@ -818,6 +822,7 @@ int main()
     printf("====谨此，纪念我的小学和中学时光====\n");
     printf("===降龙·拍手游戏===\n");
     printf("==Programmed by aixintao2022==\n");
+    printf("version: v2.0.0-pre0\n");
     int opt;
     print_GameRule();
     do {
