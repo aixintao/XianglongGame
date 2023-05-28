@@ -21,9 +21,18 @@
     <ClCompile Include="xlplayer.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="xlmanager.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="xlplayer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="global.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="xlmanager.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
