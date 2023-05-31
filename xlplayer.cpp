@@ -1,11 +1,11 @@
 #include "global.h"
 
-using namespace std;
+using namespace std;/*
 
-bool _player::jud_cheat() {
-    if (gst > 0) pt -= gst;
-    if (gst == -2) row_def1++;
-    if (gst == -3) row_def2++;
+bool player::jud_cheat() {
+    if (this->gst > 0) pt -= this->gst;
+    if (this->gst == -2) row_def1++;
+    if (this->gst == -3) row_def2++;
     bool cheat = false;
     //judging conditions
     {
@@ -16,9 +16,8 @@ bool _player::jud_cheat() {
     return cheat;
 }
 
-bool _player::rename(string str){
+bool player::rename(string str){
     name = str;
-
     return false;
 }
 
@@ -82,274 +81,14 @@ int player::setgesture() {
     }
     return gst;
 }
-
-int cpu::setgesture() {    //CPUAI号
-    int gst;
-
-    switch (ai) {
-    case 0: {
-        if (xlgame.round == 1) {
-            gst = 0;
-        }
-        else if (pt >= 18) {
-            gst = 18;
-        }
-        else {
-            ql = 1; qr = 0;
-            //进攻策略
-            if (ptself >= 9) gstok[++qr] = 9;
-            if (ptself >= 6) gstok[++qr] = 6;
-            if (ptself >= 5) gstok[++qr] = 5;
-            if (ptself >= 3) gstok[++qr] = 3;
-            if (ptself >= 2) gstok[++qr] = 2;
-            if (ptself >= 1) gstok[++qr] = 1;
-            //防守策略
-            if (ptoppo >= 9 && row2 < 4) gstok[++qr] = -3;
-            if (ptoppo >= 5 && row1 < 5) gstok[++qr] = -2;
-            if (ptoppo >= 1) gstok[++qr] = -1;
-            //续航策略
-            gstok[++qr] = 0;
-            gst = gstok[(ran % qr) + ql];
-        }
-        break;
-    }
-    case 1: {
-        if (rounds == 1) {
-            gst = 0;
-        }
-        else if (ptself >= 18) {
-            gst = 18;
-        }
-        else {
-            ql = 1; qr = 0;
-            //进攻策略
-            if (ptself >= 9) gstok[++qr] = 9;
-            if (ptself >= 6) gstok[++qr] = 6;
-            if (ptself >= 5) gstok[++qr] = 5;
-            if (ptself >= 3) gstok[++qr] = 3;
-            if (ptself >= 2) gstok[++qr] = 2;
-            if (ptself >= 1) gstok[++qr] = 1;
-            if (ptself >= 9) gstok[++qr] = 9;
-            if (ptself >= 6) gstok[++qr] = 6;
-            if (ptself >= 5) gstok[++qr] = 5;
-            if (ptself >= 3) gstok[++qr] = 3;
-            if (ptself >= 2) gstok[++qr] = 2;
-            if (ptself >= 1) gstok[++qr] = 1;
-            //防守策略
-            if (ptoppo >= 9 && row2 < 4) gstok[++qr] = -3;
-            if (ptoppo >= 5 && row1 < 5) gstok[++qr] = -2;
-            if (ptoppo >= 1) gstok[++qr] = -1;
-            //续航策略
-            gstok[++qr] = 0;
-            gst = gstok[(ran % qr) + ql];
-        }
-        break;
-    }
-    case 2: {
-        /*  原LYB型AI代码
-        if (rounds == 1) {
-            gst = 0;
-        }
-        else if (ptself >= 18) {
-            gst = 18;
-        }
-        else {
-            ql = 1; qr = 0;
-            //进攻策略
-            if (ptself >= 9 && ptself <= 16) gstok[++qr] = 9;
-            if (ptself >= 9 && ptself <= 14) gstok[++qr] = 9;
-            if (ptself >= 5 && ptself <= 8) gstok[++qr] = 5;
-            if (ptself >= 3 && ptself <= 4) gstok[++qr] = 3;
-            if (ptself >= 2 && ptself <= 3) gstok[++qr] = 2;
-            if (ptself >= 1) gstok[++qr] = 1;
-            //防守策略
-            if (ptoppo >= 9 && row2 < 4) gstok[++qr] = -3;
-            if (ptoppo >= 9 && row2 < 4) gstok[++qr] = -3;
-            if (ptoppo >= 9 && row2 < 4) gstok[++qr] = -3;
-            if (ptoppo >= 9 && row2 < 4) gstok[++qr] = -3;
-            if (ptoppo >= 9 && row2 < 4) gstok[++qr] = -3;
-            if (ptoppo >= 9 && row2 < 4) gstok[++qr] = -3;
-            if (ptoppo >= 9 && row2 < 4) gstok[++qr] = -3;
-            if (ptoppo >= 9 && row2 < 4) gstok[++qr] = -3;
-            if (ptoppo >= 5 && row1 < 5) gstok[++qr] = -2;
-            if (ptoppo >= 5 && row1 < 5) gstok[++qr] = -2;
-            if (ptoppo >= 5 && row1 < 5) gstok[++qr] = -2;
-            if (ptoppo >= 5 && row1 < 5) gstok[++qr] = -2;
-            if (ptoppo >= 5 && row1 < 5) gstok[++qr] = -2;
-            if (ptoppo >= 5 && row1 < 5) gstok[++qr] = -2;
-            if (ptoppo >= 5 && row1 < 5) gstok[++qr] = -2;
-            if (ptoppo >= 5 && row1 < 5) gstok[++qr] = -2;
-            if (ptoppo >= 3) gstok[++qr] = -1;
-            if (ptoppo >= 2) gstok[++qr] = -1;
-            if (ptoppo >= 1) gstok[++qr] = -1;
-            if (ptoppo >= 1) gstok[++qr] = -1;
-            if (ptoppo >= 1) gstok[++qr] = -1;
-            //续航策略
-            Node* toppo = memoself;
-            while (toppo->next != nullptr) {
-                if (toppo->next->next != nullptr) {
-                    if (toppo->next->next->next != nullptr) {
-                        toppo = toppo->next;
-                    }
-                    else break;
-                }
-                else break;
-            }
-            if (toppo->next != nullptr) {
-                if (toppo->next->next != nullptr) {
-                    if (toppo->next->next->next != nullptr) {
-                        if (toppo->gst == 0 && toppo->next->gst ==0 && toppo->next->next->gst == 0) {
-                            if (ptself >= 9) gstok[++qr] = 9;
-                            if (ptself >= 6) gstok[++qr] = 5;
-                            if (ptself >= 2) gstok[++qr] = 2;
-                            if (ptself >= 1) gstok[++qr] = 1;
-                            if (ptself >= 1) gstok[++qr] = 1;
-                            if (ptself >= 1) gstok[++qr] = 1;
-                        }
-                    }
-                }
-            }
-            //if (ptoppo >= 5) gstok[++qr] = 0;
-
-            if (ptoppo == 0) gstok[++qr] = 0;
-            if (ptoppo == 0) gstok[++qr] = 0;
-            if (ptoppo == 0) gstok[++qr] = 0;
-            gstok[++qr] = 0;
-            gst = gstok[(ran % qr)];
-        }
-        break;
-        */
-        {
-            if (rounds == 1) {
-                gst = 0;
-            }
-            else if (ptself >= 18) {
-                gst = 18;
-            }
-            else {
-                ql = 1; qr = 0;
-                //进攻策略
-                if (ptself >= 9) gstok[++qr] = 9;
-                if (ptself >= 6) gstok[++qr] = 6;
-                if (ptself >= 5) gstok[++qr] = 5;
-                if (ptself >= 3) gstok[++qr] = 3;
-                if (ptself >= 2) gstok[++qr] = 2;
-                if (ptself >= 1) gstok[++qr] = 1;
-                //防守策略
-                if (ptoppo >= 9 && row2 < 4) gstok[++qr] = -3;
-                if (ptoppo >= 5 && row1 < 5) gstok[++qr] = -2;
-                if (ptoppo >= 1) gstok[++qr] = -1;
-                if (ptoppo >= 9 && row2 < 4) gstok[++qr] = -3;
-                if (ptoppo >= 5 && row1 < 5) gstok[++qr] = -2;
-                if (ptoppo >= 1) gstok[++qr] = -1;
-                //续航策略
-                gstok[++qr] = 0;
-                gst = gstok[(ran % qr) + ql];
-            }
-            break;
-        }
-    }
-    case 3: {
-        if (rounds == 1) {
-            gst = 0;
-        }
-        else if (ptself >= 18) {
-            gst = 18;
-        }
-        else {
-            ql = 1; qr = 0;
-            //进攻策略
-            if (ptself >= 1) gstok[++qr] = 1;
-            if (ptself >= 1) gstok[++qr] = 1;
-            if (ptself >= 1) gstok[++qr] = 1;
-            if (ptself >= 1) gstok[++qr] = 1;
-            if (ptself >= 1) gstok[++qr] = 1;
-            //防守策略
-            if (ptoppo >= 9 && row2 < 4) gstok[++qr] = -3;
-            if (ptoppo >= 5 && row1 < 5) gstok[++qr] = -2;
-            if (ptoppo >= 1) gstok[++qr] = -1;
-            //续航策略
-            if (ptself <= 0) gstok[++qr] = 0;
-            gst = gstok[(ran % qr) + ql];
-        }
-        break;
-    }
-    case 4: {
-        if (rounds == 1) {
-            gst = 0;
-        }
-        else if (ptself >= 18) {
-            gst = 18;
-        }
-        else {
-            ql = 1; qr = 0;
-            //进攻策略
-            if (ptself >= 1) gstok[++qr] = 1;
-            if (ptself >= 1) gstok[++qr] = 1;
-            if (ptself >= 1) gstok[++qr] = 1;
-            if (ptself >= 1) gstok[++qr] = 1;
-            if (ptself >= 1) gstok[++qr] = 1;
-            //防守策略
-            if (ptoppo >= 1) gstok[++qr] = -1;
-            //续航策略
-            if (ptself <= 0) gstok[++qr] = 0;
-            gst = gstok[(ran % qr) + ql];
-        }
-        break;
-    }
-    case 5: {
-        if (rounds == 1) {
-            gst = 0;
-        }
-        else {
-            ql = 1; qr = 0;
-            //进攻策略
-            if (ptself >= 1) gstok[++qr] = 1;
-            //防守策略
-            if (ptoppo >= 1) gstok[++qr] = -1;
-            //续航策略
-            if (ptself <= 0) gstok[++qr] = 0;
-            gst = gstok[(ran % qr) + ql];
-        }
-        break;
-    }
-    case 6: {
-        if (rounds == 1) {
-            gst = 0;
-        }
-        else {
-            ql = 1; qr = 0;
-            //进攻策略
-            if (ptself >= 2) gstok[++qr] = 2;
-            //防守策略
-            if (ptoppo >= 1) gstok[++qr] = -1;
-            if (ptoppo >= 1) gstok[++qr] = -1;
-            if (ptoppo >= 1) gstok[++qr] = -1;
-            //续航策略
-            if (ptself <= 1) gstok[++qr] = 0;
-            gst = gstok[(ran % qr) + ql];
-        }
-        break;
-    }
-    default:
-        printf("机器出手程序异常！");
-        return -127;
-    }
-    return gst;
-}
-
-cpu::cpu(int ai){
-    this->ai = ai;
-    this->pt = 0;
-}
-
+*/
 string getinput() {
 	string password;
 	int index = 0;
 	while (1)
 	{
 		char ch;
-		ch = getch();
+		ch = _getch();
 		if (ch == 8) //退格键
 		{
 			if (index != 0)
@@ -372,3 +111,5 @@ string getinput() {
 	}
 	return password;
 }
+
+

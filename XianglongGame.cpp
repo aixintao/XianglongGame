@@ -15,10 +15,8 @@ int gstok[60], ql = 1, qr;    //机器可用操作列表
 unsigned long long ran;    //随机数
 
 mt19937_64 random(std::random_device{}()); //随机数
-manager xlgame; //管理类
-
-constexpr int maxrow1 = 4;
-constexpr int maxrow2 = 3;
+//manager xlgame; //管理类
+char buffer[50000];
 
 
 
@@ -148,7 +146,7 @@ int Gamestart() {
         cpu_type = -1;
     }
 
-    srand((unsigned)time(NULL) + ran);
+    srand((unsigned)(time(NULL) + ran));
     ran = rand();    //生成随机数
     return cpu_type;
 }
@@ -749,12 +747,12 @@ int continue_game() {
             time(&times); // 时间戳，可以用time(&mytime);获取当前时间戳
             struct tm* timeP = (tm*)malloc(sizeof(tm));
             
-            char buffer[128];
+            //char buffer[128];
             /*
             利用东八区（北京时间,其他国家，美国，英国等，需要相应的进行加或者减X小时），
             则真正的换算时间戳为
             */
-            PTime = times + (0 * 60 * 60);
+            PTime = times + (0LL * 60 * 60);
             localtime_s(timeP,&PTime);    // 转换
             fprintf(f1p, "%d/%d/%d %d:%d:%d\n", 1900 + timeP->tm_year, 1 + timeP->tm_mon, timeP->tm_mday, timeP->tm_hour, timeP->tm_min, timeP->tm_sec);
         }

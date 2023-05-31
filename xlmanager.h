@@ -1,27 +1,20 @@
 #pragma once
 
-//手势类（操作类）
-class gesture {
-protected:
-public:
-	int gesture;
-	_player& source;
-	vector<_player&> target;
-	bool setgesture();
-	bool judge();
-	bool operator >(int x)	{ return (gesture > x);		}
-	bool operator <(int x)	{ return (gesture < x);		}
-	bool operator ==(int x)	{ return (gesture == x);	}
-	friend int operator-=(int& x, class gesture g);
-};
+#include "global.h"
+
+using namespace std;
+/*
+class gesture;
+class player;
 
 //游戏管理类
 class manager {
 protected:
+	friend class player;
 	int total; //number of players in this game
 	int round; //round counting
-	vector<_player> list; //the list of the players
-	//vector<gesture> gestures;
+	vector<player> list; //the list of the players
+
 	int over; //is the game over
 	string log; //logs
 	bool savelog();
@@ -31,7 +24,6 @@ public:
 	bool setgesture();
 	bool judgeround();
 	bool gameover();
-	friend class _player;
-	friend class player;
-	friend class cpu;
-};
+
+	manager() = default;
+};*/

@@ -10,22 +10,25 @@
 #include <math.h>
 #include <random>
 
-#include <ranges>
+//#include <ranges>
 #include <vector>
+#include <string>
 #include <queue>
 #include <stack>
 #include <map>
 #include <list>
 
-#include "xlplayer.h"
 #include "xlmanager.h"
+#include "xlplayer.h"
+
+//
+using namespace std;
 
 //global variables
 extern mt19937_64 random;
-extern manager xlgame;
-extern constexpr int maxrow1 = 4;
-extern constexpr int maxrow2 = 3;
-//
-using namespace std;
+//extern manager xlgame;
+constexpr int maxrow1 = 4;
+constexpr int maxrow2 = 3;
+extern char buffer[50000];
 
 //
