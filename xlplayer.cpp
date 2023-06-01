@@ -1,6 +1,6 @@
 #include "global.h"
 
-using namespace std;/*
+using namespace std;
 
 bool player::jud_cheat() {
     if (this->gst > 0) pt -= this->gst;
@@ -21,7 +21,7 @@ bool player::rename(string str){
     return false;
 }
 
-int player::setgesture() {
+bool player::setgesture() {
     int bad = 1;
     int gst;
     char input;
@@ -79,9 +79,9 @@ int player::setgesture() {
         gst = -127;
         break;
     }
-    return gst;
+    return false;
 }
-*/
+
 string getinput() {
 	string password;
 	int index = 0;

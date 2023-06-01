@@ -1,11 +1,12 @@
 #include "global.h"
-/*
-bool candefend(const gesture& sce, const gesture& tgt) {
+
+bool candefend(gesture& sce, gesture& tgt) {
 	//source is not attacking
 	if (sce.gst <= 0) return true;
 	//source is not aiming to target
 	if (find(sce.target.begin(), sce.target.end(),
 		tgt.source) == sce.target.end()) return true;
+
 	//source is aiming to target
 	if (tgt.gst >= sce.gst) return true;
 	if (tgt.gst == -1 && sce.gst < 5) return true;
@@ -51,7 +52,6 @@ bool manager::setgesture(){
 	return false;
 }
 
-/*
 bool manager::judgeround(){
 	vector<player*> death;
 	//judge cheat
@@ -63,6 +63,7 @@ bool manager::judgeround(){
 			death.push_back(&(*it));
 		}
 	}
+	
 	//judge gesture
 	cout << "Judging gestures..." << endl;
 	for (auto it = this->list.begin(); it != this->list.end(); it++) {
@@ -70,7 +71,7 @@ bool manager::judgeround(){
 		if ((*it).gst > 0) {
 			for (auto p = (*it).gst.target.begin(); p != (*it).gst.target.end(); p++) {
 				if (!candefend((*it).gst, (*(*p)).gst)) {
-					if (find(death.begin(), death.end(), &(*p)) == death.end()) {
+					if (find(death.begin(), death.end(), *p) == death.end()) {
 						death.push_back((*p));
 					}
 				}
@@ -98,8 +99,3 @@ bool gesture::judge(){
 
 	return false;
 }
-
-int operator-=(int& x, gesture g) {
-	x -= g.gst * int(g.target.size());
-}
-*/

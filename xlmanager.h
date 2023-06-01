@@ -3,7 +3,7 @@
 #include "global.h"
 
 using namespace std;
-/*
+
 class gesture;
 class player;
 
@@ -26,4 +26,4 @@ public:
 	bool gameover();
 
 	manager() = default;
-};*/
+};

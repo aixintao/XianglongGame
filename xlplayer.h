@@ -2,22 +2,23 @@
 
 #include "global.h"
 
-/*
+
 class player;
-class manager;
 
 //手势类（操作类）
 class gesture {
 public:
 	int gst;
 	player* source;
-	vector<player> target;
+	vector<player*> target;
 	bool setgesture();
 	bool judge();
 	bool operator >(int x) { return (gst > x); }
 	bool operator <(int x) { return (gst < x); }
 	bool operator ==(int x) { return (gst == x); }
-	friend int operator-=(int& x, class gesture g);
+	friend int operator-=(int x, class gesture g) {
+		return x - (g.gst * int(g.target.size()));
+	}
 	gesture() {
 		gst = 0;
 		source = 0;
@@ -48,7 +49,7 @@ protected:
 public:
 	bool jud_cheat(); //判定赖死
 	bool rename(string str);
-	virtual int setgesture();
+	bool setgesture();
 	player() = default;
 	player(const player& p) {
 		name = p.name;
@@ -69,5 +70,5 @@ public:
 		ai = ai;
 	}
 };
-*/
+
 //string getinput();
